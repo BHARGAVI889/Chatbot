@@ -1,0 +1,284 @@
+<!-- LBRCE Chatbot Widget -->
+<!-- Include this file's <style>, HTML, and <script> on any page, or embed via iframe -->
+
+<style>
+  #lbrce-chat-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #0b3d91; /* swap for LBRCE brand color */
+    color: white;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 9999;
+  }
+
+  #lbrce-chat-window {
+    position: fixed;
+    bottom: 96px;
+    right: 24px;
+    width: 420px;
+    max-width: 92vw;
+    height: 620px;
+    max-height: 85vh;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+
+  #lbrce-chat-window.open { display: flex; }
+
+  #lbrce-chat-header {
+    background: #0b3d91;
+    color: white;
+    padding: 12px 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #lbrce-chat-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  #lbrce-chat-messages {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    background: #f5f7fa;
+  }
+
+  .lbrce-msg {
+    max-width: 82%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+
+  .lbrce-msg.bot {
+    background: #e4e9f2;
+    color: #222;
+    border-bottom-left-radius: 2px;
+    align-self: flex-start;
+  }
+
+  .lbrce-msg.user {
+    background: #0b3d91;
+    color: white;
+    border-bottom-right-radius: 2px;
+    margin-left: auto;
+  }
+
+  #lbrce-chat-messages {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #lbrce-chat-input-area {
+    display: flex;
+    border-top: 1px solid #ddd;
+  }
+
+  #lbrce-chat-input {
+    flex: 1;
+    border: none;
+    padding: 12px;
+    font-size: 14px;
+    outline: none;
+  }
+
+  #lbrce-chat-send {
+    background: #0b3d91;
+    color: white;
+    border: none;
+    padding: 0 16px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .lbrce-quick-replies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .lbrce-quick-replies button {
+    background: white;
+    border: 1px solid #0b3d91;
+    color: #0b3d91;
+    border-radius: 14px;
+    padding: 6px 10px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .lbrce-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .lbrce-links a {
+    color: #0b3d91;
+    background: #fff;
+    border: 1px solid #0b3d91;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .lbrce-links a:hover {
+    background: #eef2fb;
+  }
+</style>
+
+<button id="lbrce-chat-btn" aria-label="Open chat">💬</button>
+
+<div id="lbrce-chat-window">
+  <div id="lbrce-chat-header">
+    <span>LBRCE Assistant</span>
+    <button id="lbrce-chat-close">✕</button>
+  </div>
+  <div id="lbrce-chat-messages"></div>
+  <div id="lbrce-chat-input-area">
+    <input id="lbrce-chat-input" type="text" placeholder="Ask about admissions, courses..." />
+    <button id="lbrce-chat-send">Send</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  // ⚠️ For local testing this points to your local backend.
+  // When you deploy the backend online, change this to that live URL.
+  const API_URL = "http://localhost:5000/api/chat";
+
+  const btn = document.getElementById("lbrce-chat-btn");
+  const win = document.getElementById("lbrce-chat-window");
+  const closeBtn = document.getElementById("lbrce-chat-close");
+  const messages = document.getElementById("lbrce-chat-messages");
+  const input = document.getElementById("lbrce-chat-input");
+  const sendBtn = document.getElementById("lbrce-chat-send");
+
+  let sessionId = localStorage.getItem("lbrce_session_id");
+  if (!sessionId) {
+    sessionId = "sess_" + Math.random().toString(36).substring(2, 15);
+    localStorage.setItem("lbrce_session_id", sessionId);
+  }
+
+  btn.addEventListener("click", () => {
+    win.classList.toggle("open");
+    if (win.classList.contains("open") && messages.children.length === 0) {
+      addMessage("bot", "Hi! I'm the LBRCE Assistant. Ask me about admissions, courses, fees, faculty, or campus facilities.");
+      addQuickReplies(["Admissions", "Courses offered", "Contact info", "Placements"]);
+    }
+  });
+
+  closeBtn.addEventListener("click", () => win.classList.remove("open"));
+
+  function addMessage(sender, text, links) {
+    const div = document.createElement("div");
+    div.className = "lbrce-msg " + sender;
+    div.textContent = text;
+
+    if (links && links.length) {
+      const linkList = document.createElement("div");
+      linkList.className = "lbrce-links";
+      links.forEach((link) => {
+        const a = document.createElement("a");
+        a.href = link.url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = "📄 " + link.label;
+        linkList.appendChild(a);
+      });
+      div.appendChild(linkList);
+    }
+
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function addQuickReplies(options) {
+    const wrap = document.createElement("div");
+    wrap.className = "lbrce-quick-replies";
+    options.forEach((opt) => {
+      const b = document.createElement("button");
+      b.textContent = opt;
+      b.onclick = () => {
+        input.value = opt;
+        sendMessage();
+      };
+      wrap.appendChild(b);
+    });
+    messages.appendChild(wrap);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  async function sendMessage() {
+    const text = input.value.trim();
+    if (!text) return;
+    addMessage("user", text);
+    input.value = "";
+
+    // typing indicator
+    addMessage("bot", "…");
+    const typingNode = messages.lastChild;
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text, session_id: sessionId }),
+      });
+      const data = await res.json();
+      typingNode.textContent = data.reply || "Sorry, I couldn't find an answer to that.";
+
+      if (data.links && data.links.length) {
+        const linkList = document.createElement("div");
+        linkList.className = "lbrce-links";
+        data.links.forEach((link) => {
+          const a = document.createElement("a");
+          a.href = link.url;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          a.textContent = "📄 " + link.label;
+          linkList.appendChild(a);
+        });
+        typingNode.appendChild(linkList);
+      }
+
+      if (data.quick_replies && data.quick_replies.length) {
+        addQuickReplies(data.quick_replies);
+      }
+    } catch (err) {
+      typingNode.textContent = "Sorry, I'm having trouble connecting right now.";
+    }
+  }
+
+  sendBtn.addEventListener("click", sendMessage);
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendMessage();
+  });
+})();
+</script>

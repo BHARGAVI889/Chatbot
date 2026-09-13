@@ -1,0 +1,48 @@
+{
+  "departmentPages": {
+    "ase": "https://www.lbrce.ac.in/ase/asetimetables.php",
+    "aids": "https://www.lbrce.ac.in/ai/aitimetables.php",
+    "civil": "https://www.lbrce.ac.in/civil/civiltimetables.php",
+    "cse": "https://www.lbrce.ac.in/cse/csetimetables.php",
+    "csm": "https://www.lbrce.ac.in/csm/csmtimetables.php",
+    "eee": "https://www.lbrce.ac.in/eee/eeetimetables.php",
+    "ece": "https://www.lbrce.ac.in/ece/ecetimetables.php",
+    "it": "https://www.lbrce.ac.in/it/ittimetables.php",
+    "mech": "https://www.lbrce.ac.in/mech/mechtimetables.php",
+    "mba": "https://www.lbrce.ac.in/mba/mbatimetables.php"
+  },
+  "cse_2026_27_odd": {
+    "1": {
+      "A": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/I_SEM/I_SEM_A_SEC_TT_AY_2026-27.jpg",
+      "B": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/I_SEM/I_SEM_B_SEC_TT_AY_2026-27.jpg",
+      "C": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/I_SEM/I_SEM_C_SEC_TT_AY_2026-27.jpg",
+      "D": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/I_SEM/I_SEM_D_SEC_TT_AY_2026-27.jpg",
+      "E": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/I_SEM/I_SEM_E_SEC_TT_AY_2026-27.jpg"
+    },
+    "3": {
+      "A": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/III_SEM/III_SEM_A_SEC_TT_AY_2026-27.jpg",
+      "B": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/III_SEM/III_SEM_B_SEC_TT_AY_2026-27.jpg",
+      "C": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/III_SEM/III_SEM_C_SEC_TT_AY_2026-27.jpg",
+      "D": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/III_SEM/III_SEM_D_SEC_TT_AY_2026-27.jpg",
+      "E": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/III_SEM/III_SEM_E_SEC_TT_AY_2026-27.jpg",
+      "F": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/III_SEM/III_SEM_F_SEC_TT_AY_2026-27.jpg",
+      "G": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/III_SEM/III_SEM_G_SEC_TT_AY_2026-27.jpg",
+      "H": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/III_SEM/III_SEM_H_SEC_TT_AY_2026-27.jpg"
+    },
+    "5": {
+      "A": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/V_SEM/V_SEM_A_SEC_TT_AY_2026-27_lat.jpeg",
+      "B": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/V_SEM/V_SEM_B_SEC_TT_AY_2026-27.jpg",
+      "C": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/V_SEM/V_SEM_C_SEC_TT_AY_2026-27.jpg",
+      "D": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/V_SEM/V_SEM_D_SEC_TT_AY_2026-27.jpg",
+      "E": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/V_SEM/V_SEM_E_SEC_TT_AY_2026-27.jpg",
+      "F": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/V_SEM/V_SEM_F_SEC_TT_AY_2026-27.jpg",
+      "G": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/V_SEM/V_SEM_G_SEC_TT_AY_2026-27_lat.jpeg"
+    },
+    "7": {
+      "A": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/VII_SEM/VII_SEM_A_SEC_TT_AY_2026-27.jpg",
+      "B": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/VII_SEM/VII_SEM_B_SEC_TT_AY_2026-27.jpg",
+      "C": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/VII_SEM/VII_SEM_C_SEC_TT_AY_2026-27.jpg",
+      "D": "https://www.lbrce.ac.in/cse/cse_timetables/2026-27/CSE_26-27_ODD_SEM/VII_SEM/VII_SEM_D_SEC_TT_AY_2026-27.jpg"
+    }
+  }
+}
